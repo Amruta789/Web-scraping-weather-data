@@ -1,0 +1,11 @@
+{
+  "name": "web-scraping",
+  "version": "1.0.0",
+  "description": "Internet Technologies Task 1, web crawling and scraping for accuweather forecast",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amruta Jandhyala",
+  "license": "ISC"
+}

@@ -1,0 +1,34 @@
+<div class="daily-wrapper">
+	<a class="daily-forecast-card " href="/en/in/hyderabad/202190/daily-weather-forecast/202190?day=9">
+        <div class="info">
+            <h2 class="date">
+                <span class="module-header dow date">Fri</span>
+                <span class="module-header sub date">11/20</span>
+            </h2>
+            <img alt="" class="weather-icon icon" data-src="/images/weathericons/1.svg" width="128px" height="128px" data-eager="" src="/images/weathericons/1.svg">
+
+            <div class="temp">
+                <span class="high">26°</span>
+                <span class="low">/17°</span>
+            </div>
+        </div>
+        <div class="phrase">
+            Sunshine
+        </div>
+        
+        <div class="precip">
+            <img alt="rain drop" class="precip-icon" src="/images/components/weather/daily-forecast-card-nfl/drop-icon.svg">
+            1%
+        </div>
+        
+        <svg role="img" aria-labelledby="arrowSVG" class="cta-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+            <title id="arrowSVG">Arrow</title>
+                <g fill="none" fill-rule="evenodd" transform="translate(1 2)">
+                        <g fill="#000">
+                                <path d="M8.495.505l5 5v.99l-5 5-.99-.99 3.805-3.806L0 6.7V5.3l11.31-.001-3.805-3.804.99-.99z" transform="translate(-1 -2)"></path>
+                        </g>
+                </g>
+        </svg>
+    </a>
+</div>
+body > div > div.two-column-page-content > div.page-column-1 > div.content-module > div:nth-child(12)
