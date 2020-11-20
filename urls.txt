@@ -1,0 +1,6 @@
+https://www.weather-forecast.com/countries/India-1
+https://www.weather-forecast.com/countries/India/locations/A
+https://www.weather-forecast.com/locations/Hyderabad/forecasts/latest
+
+body > main > section:nth-child(14) > div.small-12.large-8.columns > div > table > tbody
+body > main > section:nth-child(3) > div > div > div.b-forecast__overflow > div > table > thead > tr.b-forecast__table-description.b-forecast__hide-for-small.days-summaries.js-day-summary
