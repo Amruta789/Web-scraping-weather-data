@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body >
+        <form method="POST" action="/login">
+            
+            <h1>Login</h1>
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required><br><br>
+            <input type="submit" value="Submit"><br><br>
+
+            <!-- Display error message if wrong password,etc -->
+            <% if(message){ %>            
+                <span style="color: red;"><%= message %></span><br><br>
+            <% } %>
+            <a href="resetpassword.ejs">Forgot Password?</a> <br><br>
+            <a href="/signup">Register here</a><br>           
+        </form>
+    </body>
+</html>

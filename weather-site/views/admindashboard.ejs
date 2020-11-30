@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Dashboard</title>
+        <script>
+            function toggleAppearance(x){
+                var dataDiv = document.getElementById(x);
+                if(dataDiv.style.display === "none"){
+                    dataDiv.style.display = "block";
+                }else{
+                    dataDiv.style.display = "none";
+                }
+            }
+        </script>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Welcome, Admin!!!</h1>
+        <h1>Admin Dashboard</h1>
+        <div>
+
+        </div>
+        <button onclick="window.location.assign('')">Insert</button><br><br>
+        <button onclick="toggleAppearance('updaterecord')">Update</button><br><br>
+        <button onclick="toggleAppearance('deleterecord')">Delete</button><br><br>
+        <button onclick="toggleAppearance('onerecordinput')">View single record</button><br><br>
+        <button onclick="toggleAppearance('allrecords')">View All Details</button><br><br>
+        <button onclick="window.location.assign('/changepassword')">Change Your Password</button><br><br>
+        <button onclick="window.location.assign('/logout')">Log out</button><br><br>
+        
+        <div id="allrecords" style="display:none">
+            
+        </div>
+        <div id="onerecordinput" style="display:none">
+            <form action="adminsinglerecord" method="POST" onsubmit="toggleAppearance('onerecord')">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" ><br><br>
+                <input type="submit" value="View Details">
+            </form>
+        </div>
+        <div id="updaterecord" style="display:none">
+            <form action="adminupdate" method="POST">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" ><br><br>
+                <label for="column">Select column name:</label>
+                <select name="column" id="column">
+                    <option value="username">Username</option>
+                    <option value="email">Email address</option>
+                    <option value="phone">Phone number</option>
+                </select><br><br>
+                <label for="newvalue">Enter new value:</label>
+                <input type="text" name="newvalue" id="newvalue"><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div id="deleterecord" style="display:none">
+            <form action="admindelete" method="POST">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" >
+                <input type="submit" value="Delete">
+            </form>
+        </div>
+        <div id="onerecord" style="display:none">
+            
+        </div>
+        
+    </body>
+</html>
