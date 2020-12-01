@@ -1,15 +1,23 @@
 {
   "name": "weather-site",
   "version": "0.0.0",
+  "description": "Internet Technologies Task 1, web crawling and scraping for weather forecast",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
     "serverstart": "DEBUG=weather-site:* npm run devstart"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Amruta789/Web-scraping-weather-data.git"
+  },
+  "author": "Amruta Jandhyala",
+  "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -18,8 +26,10 @@
     "express": "~4.16.1",
     "express-session": "^1.17.1",
     "express-validator": "^6.6.1",
+    "file-type": "^16.0.1",
     "http-errors": "~1.6.3",
     "mongoose": "^5.10.15",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "node-fetch": "^2.6.1"
   }
 }

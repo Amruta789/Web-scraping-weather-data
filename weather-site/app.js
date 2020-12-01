@@ -8,7 +8,6 @@ var logger = require('morgan');
 require('dotenv').config();
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 var mongoose = require('mongoose');
 var mongoDB = process.env.MONGODB_URL;
