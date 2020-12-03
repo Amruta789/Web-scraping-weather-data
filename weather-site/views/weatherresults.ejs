@@ -1,0 +1,54 @@
+
+<div>
+    <% if(typeof records !== 'undefined'){ %>
+        <% if (records === 'No results found'){ %>
+            <p>No results found</p>            
+        <%}else if (records.length >0){ %>
+            <% var row = JSON.parse(records) %>
+            <h2><%= row.place %></h2>
+            <p>
+                <h4><%= row.oneToThree.heading %></h4>
+                <%= row.oneToThree.text %>
+            </p>
+            <p>
+                <h4><%= row.fourToSeven.heading %></h4>
+                <%= row.fourToSeven.text %>
+            </p>
+            <p>
+                <h4><%= row.sevenToTen.heading %></h4>
+                <%= row.sevenToTen.text %>
+            </p>
+            <p>
+                <h4><%= row.tenToTwelve.heading %></h4>
+                <%= row.tenToTwelve.text %>
+            </p>
+            <% if (row.nearbyPlaces.length >0){ %>
+                <h3>Nearby Places Weather</h3>
+                <% row.nearbyPlaces.forEach(function(item){ %>
+                <table >
+                    <thead>
+                    <tr>
+                        <th>Place Name</th>
+                        <th><%= item.oneToThree.heading %></th>
+                        <th><%= item.fourToSeven.heading %></th>
+                        <th><%= item.sevenToTen.heading %></th>
+                        <th><%= item.tenToTwelve.heading %></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    
+                    <tr>
+                        <td><%= item.place %></td>
+                        <td><%= item.oneToThree.text %></td>
+                        <td><%= item.fourToSeven.text %></td>
+                        <td><%= item.sevenToTen.text %></td>
+                        <td><%= item.tenToTwelve.text %></td>
+                    </tr>
+                    
+                    </tbody>
+                </table>
+            <% })} %>
+        <% } %>
+    <% } %>
+</div>
+

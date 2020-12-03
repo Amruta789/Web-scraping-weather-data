@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Users = require("../models/Users");
+var scrape=require('../utilities/cheerio-scrape');
 var fs = require("fs");
 const fileType = require("file-type");
 
@@ -47,7 +48,7 @@ router.get('/dashboard', function(req, res, next) {
             img: null,
             username: user.username,
             email: user.email,
-            phone: user.phone
+            phone: user.phone,
           });
         }
       } 
@@ -55,7 +56,12 @@ router.get('/dashboard', function(req, res, next) {
   } else {
     res.render("login",{message: "Please login again"});
   }
+});
 
+router.post('/search',async function(req,res){
+  var result=await scrape.scrapeData(req.body.place);
+  //console.log(result);
+  res.render('weatherresults', { records: result});
 });
 
 router.post('/dashboard', function(req, res, next){
