@@ -1,0 +1,26 @@
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if( values && values.length>0){ %>
+                <% values.forEach(function(item){ %>
+                    <tr>
+                        <td>item.username</td>
+                        <td>item.email</td>
+                        <td>item.phone</td>
+                    </tr>
+                <% )} %>
+            <% }else{ %>
+                <tr>
+                    <td colspan="3"> No results found</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>

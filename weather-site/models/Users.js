@@ -43,8 +43,15 @@ var userSchema = new mongoose.Schema({
       required: [true, 'User email required'], 
       unique: true
     },
-  profilePicturePath: String, //store the path to profilepic
-  }, schemaOptions);
+    profilePicturePath: String, //store the path to profilepic
+    messages: {
+      type: [{
+        from: String,
+        message: String,
+        updated: { type: Date, default: Date.now }
+      }]
+    }
+  },schemaOptions);
   
   userSchema.pre("save", function(next) {
     if(!this.isModified("password")) {

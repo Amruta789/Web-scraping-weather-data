@@ -8,6 +8,8 @@ var logger = require('morgan');
 require('dotenv').config();
 
 var indexRouter = require('./routes/index');
+var dashboardRouter = require('./routes/dashboard');
+var adminDashboardRouter= require('./routes/admindashboard');
 
 var mongoose = require('mongoose');
 var mongoDB = process.env.MONGODB_URL;
@@ -41,7 +43,18 @@ app.use(session(
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req, res, next) {
+  //store the root folder from where the app is launched.
+  req.rootPath = __dirname;
+  console.log("rootPath"+req.rootPath);
+  res.locals.user = req.user;
+  res.locals.session = req.session;
+  next();
+});
+
 app.use('/', indexRouter);
+app.use('/dashboard/',dashboardRouter);
+app.use('admindashboard',adminDashboardRouter);
 
 app.use((req, res, next) => {
   if (req.cookies.user_sid && !req.session.user) {

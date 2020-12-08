@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Users = require("../models/Users");
+
 var scrape=require('../utilities/cheerio-scrape');
 var fs = require("fs");
 const fileType = require("file-type");
@@ -23,63 +24,8 @@ router.get('/', function(req, res, next) {
   res.redirect('/login');
 });
 
-router.get('/dashboard', function(req, res, next) {
-  if (req.session.user && req.cookies.user_sid) {
-    Users.findOne({ username: req.session.user.username }, function(err, user) {
-      if (err) {
-        console.log("err" + err);
-      } else if (user && "profilePicturePath" in user) {
-        if (fs.existsSync(req.rootPath + user.profilePicturePath)) {
-          console.log(req.rootPath + user.profilePicturePath);
-          let img = fs.readFileSync(req.rootPath + user.profilePicturePath);
-          let mime = fileType(img);
-          img = new Buffer.from(img, "binary").toString("base64");
-         
-          res.render("dashboard", {
-            mime: mime.mime,
-            img: img,
-            username: user.username,
-            email: user.email,
-            phone: user.phone
-          });
-        } else {
-          res.render("dashboard", {
-            mime:null,
-            img: null,
-            username: user.username,
-            email: user.email,
-            phone: user.phone,
-          });
-        }
-      } 
-    });
-  } else {
-    res.render("login",{message: "Please login again"});
-  }
-});
-
-router.post('/search',async function(req,res){
-  var result=await scrape.scrapeData(req.body.place);
-  //console.log(result);
-  res.render('weatherresults', { records: result});
-});
-
-router.post('/dashboard', function(req, res, next){
-  
-})
-
-router.get('/admindashboard', function(req, res, next){
-  if (req.session.user && req.cookies.user_sid) {
-    res.render('admindashboard');
-  } else {
-    res.render("login",{message: "Please login again"});
-  }
-  
-});
-
 router.get('/login',sessionChecker,function(req,res,next){
   res.render("login",{message:null});
-
 });
 
 router.post('/login', async function(req,res,next){
@@ -121,7 +67,7 @@ router.post('/signup', function(req,res,next){
     if (err) {
       res.render("signup",{message: "Error signing up, username or email may already exist."});
     } else {
-        console.log(docs)
+      console.log(docs)
       req.session.user = docs;
       if(user.username==='Admin'){
         res.redirect('/admindashboard');
@@ -157,9 +103,37 @@ router.post('/resetpassword',async function(req,res,next){
     user.password=result;
     await user.save();
     res.send({success: true, newpassword: result});
-} catch (error) {
-  console.log(error)
-}  
+  } catch (error) {
+    console.log(error)
+  }  
+});
+
+router.post('/uploadPhoto', function(req,res){
+  if (req.session.user && req.cookies.user_sid) {
+    var base64Data = req.body.imgBase64.replace(/^data:image\/jpeg;base64,/, "");
+    var path = "." + req.body.fileName;
+    fs.writeFile(path, base64Data, "base64",async function(err) {
+      if (err) {
+        console.log(err);
+      } else {
+        await Users.findOne({ username: req.session.user.username }, function(err, user) {
+          console.log(JSON.stringify(user));
+          if (err) {
+            console.log("err"+err);
+          } else if (user) {
+            console.log("test4");
+            user.profilePicturePath = req.body.fileName;
+            user.save(); 
+            console.log(user);
+          }
+          res.redirect("/");
+        });
+      }
+    });
+    
+  } else {
+    res.render("login",{message: "Please login again"});
+  }
 });
 
 router.get('/changepassword', function(req, res){
@@ -189,41 +163,6 @@ router.post('/changepassword', async function(req, res){
       console.log(error)
     }
 })
-
-router.get('/logout',function(req,res,next){
-  if (req.session.user && req.cookies.user_sid) {
-    res.clearCookie("user_sid");
-    res.redirect("/");
-  } else {
-    res.render("login",{message: null});
-  }
-});
-
-router.post('/uploadphoto', function(req,res){
-  if (req.session.user && req.cookies.user_sid) {
-    var base64Data = req.body.imgBase64.replace(/^data:image\/jpeg;base64,/, "");
-    var path = "." + req.body.fileName;
-    fs.writeFile(path, base64Data, "base64", function(err) {
-      if (err) {
-        console.log(err);
-      } else {
-        Users.findOne({ username: req.session.user.username }, function(err, user) {
-          console.log(JSON.stringify(user));
-          if (err) {
-            console.log("err"+err);
-          } else if (user) {
-            user.profilePicturePath = req.body.fileName; 
-          }
-          user.save();
-          res.redirect("/");
-        });
-      }
-    });
-    
-  } else {
-    res.render("login",{message: "Please login again"});
-  }
-});
 
 module.exports = router;
 

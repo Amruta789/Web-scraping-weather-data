@@ -1,0 +1,21 @@
+<div>
+    <div id="profilepic">
+        <img id="UploadedImg" src="data:<%= mime %>;base64, <%= img %>" alt="profilepicture" style="width: 120px; height: 120px ;display: none;">
+        <form enctype="multipart/form-data">
+            <input type="file" name="profilepicture" id="profilepicture" accept="image/png, image/jpeg">
+            <input type="submit" id="submit" value="Submit">
+
+        </form>
+    </div>
+    <div id="username">
+        <p><%= username %></p>
+    </div>
+    <div id="email">
+        <p><%= email %></p>
+    </div>
+    <div id="phone">
+        <p><%= phone %></p>
+    </div>
+    <button onclick="window.location.assign('/changepassword')">Change Your Password</button>
+    <button onclick="window.location.assign('/logout')">Log out</button><br><br>
+</div>     

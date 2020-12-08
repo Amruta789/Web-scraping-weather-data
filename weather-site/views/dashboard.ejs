@@ -3,129 +3,21 @@
     <head>
         <title>Weather Forecast</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <script>           
-                var imgSent = '<%= img %>';
-            
-            $(document).ready(function() {                
-                if(imgSent === ''){
-                    $("#UploadedImg").hide();
-                }
-                else{
-                    $("#UploadedImg").show();
-                }
-                if (window.File && window.FileReader && window.FormData) {
-                    var $inputField = $("#profilepicture");
-
-                    $inputField.on("change", function(e) {
-                        var file = e.target.files[0];
-
-                        if (file) {
-                            if (/^image\//i.test(file.type)) {
-                                readFile(file);
-                            } else {
-                                alert("Not a valid image!");
-                            }
-                        }
-                    });
-                } else {
-                    alert("File upload is not supported!");
-                }
-                function readFile(file) {
-                    var reader = new FileReader();
-
-                    reader.onloadend = function() {
-                        processFile(reader.result, file.type);
-                    };
-
-                    reader.onerror = function() {
-                        alert("There was an error reading the file!");
-                    };
-
-                    reader.readAsDataURL(file);
-                }
-                function processFile(dataURL, fileType) {
-                    var maxWidth = 200;
-                    var maxHeight = 200;
-
-                    var image = new Image();
-                    image.src = dataURL;
-
-                    image.onload = function() {
-                        var width = image.width;
-                        var height = image.height;
-                        var shouldResize = width > maxWidth || height > maxHeight;
-
-                        if (!shouldResize) {
-                            sendFile(dataURL,fileType);
-                            return;
-                        }
-
-                        var newWidth;
-                        var newHeight;
-
-                        if (width > height) {
-                            newHeight = height * (maxWidth / width);
-                            newWidth = maxWidth;
-                        } else {
-                            newWidth = width * (maxHeight / height);
-                            newHeight = maxHeight;
-                        }
-
-                        var canvas = document.createElement("canvas");
-
-                        canvas.width = newWidth;
-                        canvas.height = newHeight;
-
-                        var context = canvas.getContext("2d");
-
-                        context.drawImage(this, 0, 0, newWidth, newHeight);
-
-                        dataURL = canvas.toDataURL(fileType);
-
-                        sendFile(dataURL,fileType);
-                    };
-
-                    image.onerror = function() {
-                        alert("There was an error processing your file!");
-                    };
-                }
-
-                function sendFile(dataURL,fileType) {
-                    var time =new Date();
-                    time=time.getTime();
-
-                    var extn = fileType.substring(fileType.lastIndexOf("/")+1);
-                    var fileName='/uploads/pics/'+time+"."+extn;
-                    
-                    $.ajax({
-                        type: "POST",
-                        url: "/uploadPhoto",
-                        data: { 
-                            imgBase64: dataURL,
-                            fileType:fileType,
-                            fileName:fileName
-                        }
-                    }).done(function(o) {
-                        console.log('saved'); 
-                    });
-                }
-            });
-        </script>
-        <style>
-            table,th,td{
-                border: 1px solid black;
-            }
-        </style>
+        <script src="/javascripts/profilepic.js"></script>
+        
     </head>
-    <body>
+    <body>        
+        <%- include navbar.ejs %>
+        
         <div id="profilepic">
-            <img id="UploadedImg" src="data:<%= mime %>;base64, <%= img %>"" alt="profilepicture" style="width: 120px; height: 120px ;display: none;">
+            <img id="UploadedImg" src="data:<%= mime %>;base64, <%= img %>" alt="profilepicture" style="width: 120px; height: 120px ;display: none;">
             <form enctype="multipart/form-data">
                 <input type="file" name="profilepicture" id="profilepicture" accept="image/png, image/jpeg">
-                <input type="submit" name="submit" id="submit" value="Submit">
+                <input type="submit" id="submit" value="Submit">
+
             </form>
         </div>
         <div id="username">
@@ -137,26 +29,15 @@
         <div id="phone">
             <p><%= phone %></p>
         </div>
-        <div id="edit"></div>
-        <div id="previoussearches"></div>
-        <div id="searchbar">
-            <form action="/search" method="POST" >
-                <input type="text" name="place" id="place" placeholder="Search city in India">
-                <input type="submit" name="submitsearch" id="submitsearch" value="Search">
-            </form>
-        </div>
-        <div id="weatherresults">
-        </div>
-        <div id="contactform">
-            <form action="" method="">
-                <textarea name="message" id="message" cols="30" rows="10"></textarea>
-            </form>
-        </div>
+        
         <div id="changepassword">
             <button onclick="window.location.assign('/changepassword')">Change Your Password</button><br><br>
         </div>
-        <div id="logout">
-            <button ><a href="/logout">Log out</a></button><br><br>
+        <div class="footer">
+            <a style="color: white;" href="/dashboard/contact">Contact Us</a>
         </div>
     </body>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 </html>
