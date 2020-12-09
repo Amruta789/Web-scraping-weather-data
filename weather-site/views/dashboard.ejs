@@ -7,34 +7,48 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="/javascripts/profilepic.js"></script>
-        
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <style>
+            html, body {
+                height: 100%;
+            }
+
+            html {
+                display: table;
+                margin: auto;
+            }
+
+            .card {
+                display: table-cell;
+                vertical-align: middle;
+            }
+        </style>
     </head>
     <body>        
         <%- include navbar.ejs %>
         
-        <div id="profilepic">
-            <img id="UploadedImg" src="data:<%= mime %>;base64, <%= img %>" alt="profilepicture" style="width: 120px; height: 120px ;display: none;">
+        <div class="card" style="width: 32rem;" id="profilepic">
+            <img id="UploadedImg" class="card-img-top" src="data:<%= mime %>;base64, <%= img %>" alt="profilepicture" style="width: 500px; height: 500px ;display: none;">
             <form enctype="multipart/form-data">
-                <input type="file" name="profilepicture" id="profilepicture" accept="image/png, image/jpeg">
-                <input type="submit" id="submit" value="Submit">
-
+                <input class="btn btn-primary" type="file" name="profilepicture" id="profilepicture" accept="image/png, image/jpeg">
+                <input class="btn btn-primary" type="submit" id="submit" value="Submit">
             </form>
-        </div>
-        <div id="username">
-            <p><%= username %></p>
-        </div>
-        <div id="email">
-            <p><%= email %></p>
-        </div>
-        <div id="phone">
-            <p><%= phone %></p>
+            <div class="card-body">
+                <h5 class="card-title"><%= username %></h5>
+                <p class="card-text"><%= email %></p>
+                <p class="card-text"><%= phone %></p>
+                <button class="btn btn-primary" onclick="window.location.assign('/changepassword')">Change Your Password</button>
+            </div>
         </div>
         
-        <div id="changepassword">
-            <button onclick="window.location.assign('/changepassword')">Change Your Password</button><br><br>
-        </div>
         <div class="footer">
-            <a style="color: white;" href="/dashboard/contact">Contact Us</a>
+            <div id="contactform">
+                <form action="/dashboard/message" method="POST">
+                    <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                    <input type="submit" value="Contact Us">
+                </form>
+            </div>
+            <!-- <a style="color: white;" href="/dashboard/contact">Contact Us</a> -->
         </div>
     </body>
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->

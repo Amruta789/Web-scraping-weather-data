@@ -4,6 +4,7 @@
         <title>Admin Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
             function toggleAppearance(x){
                 var dataDiv = document.getElementById(x);
@@ -14,6 +15,22 @@
                 }
             }
         </script>
+        <script>
+            $(document).ready(function(){
+                $("#viewone").on("submit", function(event){
+                    event.preventDefault();
+            
+                    var formValues= $(this).serialize();
+            
+                    $.post("/admindashboard/viewone", formValues, function(result){
+                        // Display the returned data in browser
+                        console.log(result);
+                        alert("Your new password is: "+result.newpassword);
+                        window.location.replace('/login');                 
+                    });
+                });
+            });
+        </script>
         <style>
             table, th, td {
                 border: 1px solid black;
@@ -21,33 +38,29 @@
         </style>
     </head>
     <body>
+        <%- include navbar.ejs %>
         <h1>Welcome, Admin!!!</h1>
         <h1>Admin Dashboard</h1>
-        <div>
-
-        </div>
         <button onclick="window.location.assign('/signup')">Insert</button>
         <button onclick="toggleAppearance('updaterecord')">Update</button>
         <button onclick="toggleAppearance('deleterecord')">Delete</button>
         <button onclick="toggleAppearance('onerecordinput')">View single record</button>
-        <button onclick="toggleAppearance('allrecords')">View All Details</button>
+        <button onclick="window.location.assign('/admindashboard/messages')">Show all messages</button>
+        <button onclick="window.location.assign('/admindashboard/users')">View All Details</button>
         
-        <div id="allrecords" style="display:none">
-            
-        </div>
         <div id="onerecordinput" style="display:none">
-            <form action="/viewone" method="POST" onsubmit="toggleAppearance('onerecord')">
+            <form id="viewone" action="/admindashboard/viewone" method="POST" onsubmit="toggleAppearance('onerecord')">
                 <label for="username">Username:</label>
                 <input type="text" name="username" id="username" ><br><br>
                 <input type="submit" value="View Details">
             </form>
         </div>
         <div id="updaterecord" style="display:none">
-            <form action="/update" method="POST">
+            <form id="update" action="/admindashboard/update" method="POST">
                 <label for="username">Username:</label>
                 <input type="text" name="username" id="username" ><br><br>
                 <label for="column">Select column name:</label>
-                <select name="column" id="column">
+                <select name="key" id="column">
                     <option value="username">Username</option>
                     <option value="email">Email address</option>
                     <option value="phone">Phone number</option>
@@ -58,18 +71,17 @@
             </form>
         </div>
         <div id="deleterecord" style="display:none">
-            <form action="/delete" method="POST">
+            <form action="/admindashboard/delete" method="POST">
                 <label for="username">Username:</label>
                 <input type="text" name="username" id="username" >
                 <input type="submit" value="Delete">
             </form>
         </div>
         <div id="onerecord" style="display:none">
-            
         </div>
         
     </body>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 </html>

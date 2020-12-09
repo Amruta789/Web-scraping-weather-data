@@ -5,19 +5,30 @@
                 <th>Username</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Profile Picture Path</th>
             </tr>
         </thead>
         <tbody>
-            <% if( values && values.length>0){ %>
-                <% values.forEach(function(item){ %>
+            <% if(values){ %>
+                <% if(values.length > 0){ %>
+                    <% values.forEach(function(item){ %>
+                        <tr>
+                            <td><%= item.username %></td>
+                            <td><%= item.email %></td>
+                            <td><%= item.phone %></td>
+                            <td><%= item.profilePicturePath %></td>
+                        </tr>
+                    <% }) %>
+                <% }else{ %>
                     <tr>
-                        <td>item.username</td>
-                        <td>item.email</td>
-                        <td>item.phone</td>
-                    </tr>
-                <% )} %>
+                        <td><%= values.username %></td>
+                        <td><%= values.email %></td>
+                        <td><%= values.phone %></td>
+                        <td><%= values.profilePicturePath %></td>
+                    </tr>                    
+                <% } %>
             <% }else{ %>
-                <tr>
+                <tr>1
                     <td colspan="3"> No results found</td>
                 </tr>
             <% } %>

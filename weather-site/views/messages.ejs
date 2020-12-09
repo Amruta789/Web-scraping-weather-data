@@ -11,11 +11,11 @@
             <% if( allmessages && allmessages.length>0){ %>
                 <% allmessages.forEach(function(item){ %>
                     <tr>
-                        <td>item.from</td>
-                        <td>item.message</td>
-                        <td>item.updated</td>
+                        <td><%= item.from %></td>
+                        <td><%= item.message %></td>
+                        <td><%= item.date %></td>
                     </tr>
-                <% )} %>
+                <% }) %>
             <% }else{ %>
                 <tr>
                     <td colspan="3"> No results found</td>

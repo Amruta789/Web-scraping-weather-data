@@ -7,10 +7,12 @@ var bodyParser= require('body-parser');
 var logger = require('morgan');
 require('dotenv').config();
 
+// Routes for the website
 var indexRouter = require('./routes/index');
 var dashboardRouter = require('./routes/dashboard');
 var adminDashboardRouter= require('./routes/admindashboard');
 
+// Connection to database
 var mongoose = require('mongoose');
 var mongoDB = process.env.MONGODB_URL;
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
@@ -33,11 +35,8 @@ app.use(session(
     saveUninitialized: false,
     resave: false,
     cookie:{
-      expires: 60000 
+      expires: 600000 
     }
-    // store: new MongoStore({
-    //   mongooseConnection: db
-    // })
   }
 ))
 app.use(express.json());
@@ -52,10 +51,12 @@ app.use(function(req, res, next) {
   next();
 });
 
+// mount the routes
 app.use('/', indexRouter);
 app.use('/dashboard/',dashboardRouter);
-app.use('admindashboard',adminDashboardRouter);
+app.use('/admindashboard/',adminDashboardRouter);
 
+// To clear cookies
 app.use((req, res, next) => {
   if (req.cookies.user_sid && !req.session.user) {
     res.clearCookie("user_sid");

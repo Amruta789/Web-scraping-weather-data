@@ -42,14 +42,14 @@ router.get('/', (req,res)=>{
 })
 
 router.post('/viewone',async function(req,res){
-  const user=(await Users.findOne({ username: req.body.username })).execPopulate();
-  res.render("userdetails", {values: {username: user.username, email: user.email, phone: user.phone}});
+  const user=await Users.findOne({ username: req.body.username }).exec();
+  res.render("userdetails", {values: user});
 })
 
 router.get('/messages', async function(req,res){
   if (req.session.user && req.cookies.user_sid) {
     if(req.session.user.username==='Admin'){
-      const admin=(await Users.findOne({ username: req.session.user.username })).execPopulate();
+      const admin=await Users.findOne({ username: req.session.user.username }).exec();
       res.render("messages", { allmessages: admin.messages});
     }
   }
@@ -58,24 +58,9 @@ router.get('/messages', async function(req,res){
 
 router.get('/users', async (req,res)=>{
   const users=await Users.find({}).exec();
-  res.render("", {values: users});
+  res.render("userdetails", {values: users});
 })
 
-router.post('/insert',async function(req,res){
-    const user= new Users({
-        username:  req.body.username,
-        password:  req.body.password,
-        email:  req.body.email,
-        phone:  req.body.phone
-      })
-      user.save((err, docs) => {
-        if (err) {
-          
-        } else {
-          
-        }
-      });
-})
 router.post('/update',async function(req,res){
     var username = req.body.username,
         key = req.body.key;
@@ -83,7 +68,7 @@ router.post('/update',async function(req,res){
         try {
           var user = await Users.findOne({ username: username }).exec();
           if(!user) {          
-              res.render("",{message: "Incorrect username"});
+              res.render("admndashboard");
           }
             user[key]=newvalue;
             await user.save();
@@ -108,13 +93,4 @@ router.post('/search',async function(req,res){
     res.render('weatherresults', { records: result});
 });
   
-
-  router.get('/logout',function(req,res,next){
-    if (req.session.user && req.cookies.user_sid) {
-      res.clearCookie("user_sid");
-      res.redirect("/");
-    } else {
-      res.render("login",{message: null});
-    }
-  });
 module.exports=router;

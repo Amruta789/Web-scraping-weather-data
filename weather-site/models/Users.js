@@ -45,11 +45,7 @@ var userSchema = new mongoose.Schema({
     },
     profilePicturePath: String, //store the path to profilepic
     messages: {
-      type: [{
-        from: String,
-        message: String,
-        updated: { type: Date, default: Date.now }
-      }]
+      type: []
     }
   },schemaOptions);
   

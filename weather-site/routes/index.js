@@ -164,5 +164,14 @@ router.post('/changepassword', async function(req, res){
     }
 })
 
+router.get('/logout',function(req,res,next){
+  if (req.session.user && req.cookies.user_sid) {
+    res.clearCookie("user_sid");
+    res.redirect("/");
+  } else {
+    res.render("login",{message: null});
+  }
+});
+
 module.exports = router;
 

@@ -40,8 +40,8 @@
                     reader.readAsDataURL(file);
                 }
                 function processFile(dataURL, fileType) {
-                    var maxWidth = 200;
-                    var maxHeight = 200;
+                    var maxWidth = 500;
+                    var maxHeight = 500;
 
                     var image = new Image();
                     image.src = dataURL;
