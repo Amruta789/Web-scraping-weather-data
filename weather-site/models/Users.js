@@ -10,6 +10,7 @@ var schemaOptions = {
   }
 };
 
+// Schema stores username, password, email, phone, profile picture path, and messages sent to admin
 var userSchema = new mongoose.Schema({
   username: { 
       type: String, 
@@ -44,11 +45,15 @@ var userSchema = new mongoose.Schema({
       unique: true
     },
     profilePicturePath: String, //store the path to profilepic
+    
+    // This is only containing values if user is admin, it contains all messages sent from other users
     messages: {
       type: []
     }
   },schemaOptions);
   
+
+  // Hashes the password before saving it in database
   userSchema.pre("save", function(next) {
     if(!this.isModified("password")) {
         return next();
@@ -57,6 +62,7 @@ var userSchema = new mongoose.Schema({
     next();
   });
 
+  // returns unhashed version of password to compare
   userSchema.methods.comparePassword = function(plaintext, callback) {
       return callback(null, bcrypt.compareSync(plaintext, this.password));
   };

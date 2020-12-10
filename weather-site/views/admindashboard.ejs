@@ -15,22 +15,7 @@
                 }
             }
         </script>
-        <script>
-            $(document).ready(function(){
-                $("#viewone").on("submit", function(event){
-                    event.preventDefault();
-            
-                    var formValues= $(this).serialize();
-            
-                    $.post("/admindashboard/viewone", formValues, function(result){
-                        // Display the returned data in browser
-                        console.log(result);
-                        alert("Your new password is: "+result.newpassword);
-                        window.location.replace('/login');                 
-                    });
-                });
-            });
-        </script>
+        
         <style>
             table, th, td {
                 border: 1px solid black;
@@ -38,12 +23,12 @@
         </style>
     </head>
     <body>
-        <%- include navbar.ejs %>
+        <%- include navbaradmin.ejs %>
         <h1>Welcome, Admin!!!</h1>
         <h1>Admin Dashboard</h1>
         <button onclick="window.location.assign('/signup')">Insert</button>
-        <button onclick="toggleAppearance('updaterecord')">Update</button>
-        <button onclick="toggleAppearance('deleterecord')">Delete</button>
+        <button onclick="toggleAppearance('updaterecord'); toggleAppearance('outputmessage')">Update</button>
+        <button onclick="toggleAppearance('deleterecord'); toggleAppearance('outputmessage')">Delete</button>
         <button onclick="toggleAppearance('onerecordinput')">View single record</button>
         <button onclick="window.location.assign('/admindashboard/messages')">Show all messages</button>
         <button onclick="window.location.assign('/admindashboard/users')">View All Details</button>
@@ -70,6 +55,7 @@
                 <input type="submit" value="Submit">
             </form>
         </div>
+        
         <div id="deleterecord" style="display:none">
             <form action="/admindashboard/delete" method="POST">
                 <label for="username">Username:</label>
@@ -77,7 +63,22 @@
                 <input type="submit" value="Delete">
             </form>
         </div>
-        <div id="onerecord" style="display:none">
+        <div id="outputmessage" style="display:none">
+            <% if(success){ %>            
+                <span class="alert alert-success" role="alert"><%= success %></span><br><br>
+            <% } else if(error){ %>            
+                <span class="alert alert-warning" role="alert"><%= error %></span><br><br>
+            <% } %>
+        </div>
+        <div id="onerecord">
+            <% if(values){ %>
+                <%- include userdetails.ejs %>
+            <% } %>
+        </div>
+        <div>
+            <% if(allmessages){ %>
+                <%- include messages.ejs %>
+            <% } %>
         </div>
         
     </body>
