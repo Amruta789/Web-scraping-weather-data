@@ -8,9 +8,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="/javascripts/profilepic.js"></script>
         <link rel='stylesheet' href='/stylesheets/style.css' />
+        
         <style>
-            html, body {
+            /* html, body {
                 height: 100%;
+                width: 100%;
             }
 
             html {
@@ -19,19 +21,23 @@
             }
 
             .card {
-                display: table-cell;
-                vertical-align: middle;
-            }
+                margin-left: 25%;
+                display: inline-block;
+                text-align: center;
+                flex-wrap: wrap;
+                align-content: center;
+                width: 100%;
+            } */
         </style>
     </head>
     <body>        
         <%- include navbar.ejs %>
         
-        <div class="card" style="width: 32rem;" id="profilepic">
-            <img id="UploadedImg" class="card-img-top" src="data:<%= mime %>;base64, <%= img %>" alt="profilepicture" style="width: 500px; height: 500px ;display: none;">
+        <div class="card" style="width: 30rem;" id="profilepic">
+            <img id="UploadedImg" class="card-img-top" src="data:<%= mime %>;base64, <%= img %>" alt="profilepicture" style="width: 450px; height: 450px ;display: none;">
             <form enctype="multipart/form-data">
                 <input class="btn btn-primary" type="file" name="profilepicture" id="profilepicture" accept="image/png, image/jpeg">
-                <input class="btn btn-primary" type="submit" id="submit" value="Submit">
+                <input class="btn btn-primary profile-submit" type="submit" id="submit" value="Submit">
             </form>
             <div class="card-body">
                 <h5 class="card-title"><%= username %></h5>
@@ -44,12 +50,12 @@
         <div class="footer">
             <div id="contactform">
                 <form action="/dashboard/message" method="POST">
-                    <textarea name="message" id="message" cols="30" rows="10"></textarea>
-                    <input type="submit" value="Contact Us">
+                    <textarea class="contact" name="message" id="message" placeholder="Type your message here..." cols="50" rows="3"></textarea><br><br>
+                    <input class="btn btn-light" type="submit" value="Contact Us">
                 </form>
             </div>
-            <!-- <a style="color: white;" href="/dashboard/contact">Contact Us</a> -->
         </div>
+
     </body>
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

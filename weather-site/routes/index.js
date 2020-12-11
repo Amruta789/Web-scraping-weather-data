@@ -34,7 +34,7 @@ router.get('/signup',function(req,res){
 
 // Displays reset password page
 router.get('/resetpassword',function(req,res){
-  res.render("resetpassword");
+  res.render("resetpassword", {message:null});
 });
 
 // Displays change password page, it can be done only if user is logged in 
