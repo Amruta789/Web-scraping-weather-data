@@ -18,9 +18,12 @@
         </script>
         
         <style>
-            table, th, td {
-                border: 1px solid black;
+            /* table, th, td {
+                border: 1px solid rgb(213, 226, 238);;
             }
+            th,td{
+                padding: 15px;
+            } */
         </style>
     </head>
     <body>
@@ -36,31 +39,43 @@
         
         <div id="onerecordinput" style="display:none">
             <form id="viewone" action="/admindashboard/viewone" method="POST" onsubmit="toggleAppearance('onerecord')">
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="username" ><br><br>
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Enter username for details to be viewed">
+                </div>
                 <input type="submit" class="btn btn-primary" value="View Details"><br><br>
             </form>
         </div>
         <div id="updaterecord" style="display:none">
             <form id="update" action="/admindashboard/update" method="POST">
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="username" ><br><br>
-                <label for="column">Select column name:</label>
-                <select name="key" id="column">
-                    <option value="username">Username</option>
-                    <option value="email">Email address</option>
-                    <option value="phone">Phone number</option>
-                </select><br><br>
-                <label for="newvalue">Enter new value:</label>
-                <input type="text" name="newvalue" id="newvalue"><br><br>
-                <input type="submit" class="btn btn-primary" value="Submit"><br><br>
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Enter username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="column">Select column name:</label>
+                    <select name="key" class="form-control" id="column">
+                        <option value="username">Username</option>
+                        <option value="email">Email address</option>
+                        <option value="phone">Phone number</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="newvalue">Enter new value:</label>
+                    <input type="text" name="newvalue" class="form-control" placeholder="Enter new value for that column" id="newvalue">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Update User Details"><br><br>
             </form>
         </div>
         
         <div id="deleterecord" style="display:none">
             <form action="/admindashboard/delete" method="POST">
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="username" >
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" name="username" placeholder="Enter username of user details to be deleted" id="username" >
+                </div>                
                 <input type="submit" class="btn btn-primary" value="Delete"><br><br>
             </form>
         </div>
@@ -71,7 +86,7 @@
                 <span class="alert alert-warning" role="alert"><%= error %></span><br><br>
             <% } %>
         </div>
-        <div id="onerecord">
+        <div id="onerecord" >
             <% if(values){ %>
                 <%- include userdetails.ejs %>
             <% } %>

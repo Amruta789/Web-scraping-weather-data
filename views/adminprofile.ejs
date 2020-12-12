@@ -10,16 +10,15 @@
     </head>
     <body>
         <%- include navbaradmin.ejs %>
-        <h1>Welcome, Admin!!!</h1>
-        <h1>Admin Profile</h1>
+        
         <div>
-            <div class="card" style="width: 30rem;" id="profilepic">
-                <img id="UploadedImg" class="card-img-top" src="data:<%= mime %>;base64, <%= img %>" alt="profilepicture" style="width: 450px; height: 450px ;display: none;">
+            <div class="card" id="profilepic">
+                <img id="UploadedImg" class="card-img-top" src="data:<%= mime %>;base64, <%= img %>" alt="profilepicture">
                 <form enctype="multipart/form-data">
-                    <input class="btn btn-primary" type="file" name="profilepicture" id="profilepicture" accept="image/png, image/jpeg">
-                    <input class="btn btn-primary profile-submit" type="submit" id="submit" value="Submit">
+                    <input class="btn btn-primary btn-sm" type="file" name="profilepicture" id="profilepicture" accept="image/png, image/jpeg">
+                    <input class="btn btn-primary btn-sm profile-submit" type="submit" id="submit" value="Submit">
                 </form>
-                <div class="card-body">
+                <div class="card-body" style="color: black">
                     <h5 class="card-title"><%= username %></h5>
                     <p class="card-text"><%= email %></p>
                     <p class="card-text"><%= phone %></p>

@@ -29,31 +29,31 @@
     <form method="POST" action="/signup">
       <div class="form-group">
         <label for="username">Username:</label>
-        <input type="text" name="username" id="username" class="form-control" required>
+        <input type="text" name="username" id="username" class="form-control" placeholder="Enter username.." required>
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password" class="form-control" minlength="8" aria-describedby="passwordHelpBlock" required>
-        <small id="passwordHelpBlock" class="form-text text-muted">
+        <input type="password" name="password" id="password" class="form-control" minlength="8" placeholder="********" aria-describedby="passwordHelpBlock" required>
+        <small id="passwordHelpBlock" class="form-text " style="color: aliceblue;">
           Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
         </small>
       </div>
       <div class="form-group">
         <label for="cpassword">Confirm Password:</label>
-        <input type="password" name="cpassword" id="cpassword" class="form-control" minlength="8" required onchange="checkPasswords()">
+        <input type="password" name="cpassword" id="cpassword" class="form-control" minlength="8" placeholder="********" required onchange="checkPasswords()">
         <span id="error" class="invalid-feedback"></span>
       </div>
       <div class="form-group">
         <label for="phone">Phone:</label>
-        <input type="tel" name="phone" id="phone" class="form-control" pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" aria-describedby="phoneHelpBlock" required>
-        <small id="phoneHelpBlock" class="form-text text-muted">
+        <input type="tel" name="phone" id="phone" class="form-control" placeholder="Phone number.." pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" aria-describedby="phoneHelpBlock" required>
+        <small id="phoneHelpBlock" class="form-text " style="color: aliceblue;">
           Your phone number must be a valid phone number, with only digits, '+' and '-' characters.
         </small>
       </div>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" name="email" id="email" class="form-control" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" aria-describedby="emailHelpBlock" required>
-        <small id="emailHelpBlock" class="form-text text-muted">
+        <input type="email" name="email" id="email" class="form-control"placeholder="Email address.." pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" aria-describedby="emailHelpBlock" required>
+        <small id="emailHelpBlock" class="form-text" style="color: aliceblue;">
           Your email address must be valid, with words separated by '.','_', before the '@' symbol, and belong to a valid email domain. 
         </small>
       </div>    

@@ -1,17 +1,25 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #2e8b7f;
+  color:rgb(213, 226, 238);
+}
+table, th, td {
+  border: 1px solid rgb(213, 226, 238);;
+}
+th,td{
+  padding: 15px;
 }
 
 a {
-  color: #00B7FF;
+  color: #9ee0fa;
   font-size: 18px;
 }
 label {
   font-size: 18px;
 }
 
-.footer {
+/* .footer {
   position: sticky;
   left: 0;
   bottom: 0;
@@ -21,7 +29,7 @@ label {
   color: white;
   line-height: 100px; 
   text-align: center;
-}
+} */
 
 .contact{
   display: inline-block;
@@ -29,16 +37,39 @@ label {
   border-radius: 5px;
   height: 70px;
   padding: 20px;
-  
+  margin:auto;
 }
 .profile-submit{
-  padding: 9px;
+  padding: 7px;
 }
 .card {
   margin: auto;
   display: block;
   text-align: center;
-  /* flex-wrap: wrap;
-  align-content: center; */
-  width: 50%;
+  width: 30rem;
+}
+#UploadedImg{
+  width: 450px; 
+  height: 450px;
+  border-radius: 50%;
+  display: none;
+}
+@media screen and (max-width: 600px){
+  .card{
+    width: 27rem;
+  }
+  #UploadedImg{
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .card{
+    width: 18rem;
+  }
+  #UploadedImg{
+    width: 250px;
+    height: 250px;
+  }
 }
