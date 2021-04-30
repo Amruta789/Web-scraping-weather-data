@@ -11,7 +11,7 @@ First read the package.json file.
 `npm install` command installs all the necessary packages.
 
 `npm run devstart`
-Starts the server in development mode.
+starts the server in development mode.
 
 Type localhost:3000/ in URL to access the homepage.
 
