@@ -8,10 +8,9 @@ Requirements:
 -NodeJS
 
 First read the package.json file.
-npm install
-The above command installs all the necessary packages.
+`npm install` command installs all the necessary packages.
 
-npm run devstart
+`npm run devstart`
 Starts the server in development mode.
 
 Type localhost:3000/ in URL to access the homepage.
